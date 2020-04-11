@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block body_content %}
+<div class="lenta-content-wrapper">
+    <div class="photos">
+        {% for item in photos %}
+        <img src="{{item}}" class="photo"/>
+        {% endfor %}
+    </div>
+    <div class="navigation">
+        <button id="prev_photos" class="btn btn-info">Previous photos</button>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='lenta.js') }}" rel="stylesheet"></script>
+{% endblock %}

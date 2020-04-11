@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block body_content %}
+    <div class='selfie-content-wrapper'>
+        <div class="selfie-content">
+            <div class="video-content">
+                <video id="video" width="480" height="320" autoplay></video>
+                <button id="snap" class="btn btn-info">Snap Photo</button>
+            </div>
+            <div id="result" class="result-content">
+                <canvas id="canvas" width="480" height="320"></canvas>
+                <button id="publish" class="btn btn-danger">Publish</button>
+            </div>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='selfie.js') }}" rel="stylesheet"></script>
+{% endblock %}

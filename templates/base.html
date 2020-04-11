@@ -15,11 +15,7 @@
         <h1>BirIndustries</h1>
         <button type="submit" class="btn btn-primary">Сделать фото</button>
     </div>
-    <div class='content'>
-    <video id="video" width="640" height="480" autoplay></video>
-    <button id="snap">Snap Photo</button>
-    <canvas id="canvas" width="640" height="480"></canvas>
-    </div>
-    <script src="{{ url_for('static', filename='main.js') }}" rel="stylesheet"></script>
+      {% block body_content %}
+      {% endblock %}
   </body>
 </html>
