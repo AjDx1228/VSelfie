@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
+{% block action_button %}
+<a href="/" class="btn btn-primary">Лента</a>
+{% endblock %}
 {% block body_content %}
     <div class='selfie-content-wrapper'>
         <div class="selfie-content">
-            <div class="video-content">
+            <div id="video-content" class="video-content">
                 <video id="video" width="480" height="320" autoplay></video>
                 <button id="snap" class="btn btn-info">Snap Photo</button>
             </div>

@@ -1,8 +1,12 @@
 var video = document.getElementById('video');
+var videoContent = document.getElementById('video-content');
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
         video.srcObject = stream;
         video.play();
+    }).catch(() => {
+        console.log('Camera is not found')
+        videoContent.style.display = 'none';
     });
 
     var result = document.getElementById('result');
@@ -25,7 +29,9 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             },
             body: JSON.stringify(data)
         });
+
+        window.location.href = `http://${window.location.host}/`;
     });
 } else {
-    video.style.display = 'none';
+    console.log('Browser does not support getUserMedia');
 }

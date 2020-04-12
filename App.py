@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, jsonify
 
 from data import db_session
 from data import photos
@@ -11,12 +11,21 @@ db_session.global_init("db/photos.sqlite")
 @app.route('/')
 def lenta():
     try: 
-        offset = request.args.get('offset')
-        photos = get_prev_photos(offset)
+        photos = get_prev_photos()
 
         return render_template('lenta.html', photos=photos)
     except:
         return render_template('error.html')
+
+@app.route('/photos')
+def get_html_photos():
+    try: 
+        offset = request.args.get('offset')
+        photos = get_prev_photos(offset)
+
+        return jsonify(photos)
+    except:
+        return jsonify([])
 
 @app.route('/selfie')
 def index():

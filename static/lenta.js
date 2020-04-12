@@ -13,11 +13,15 @@ const OFFSET_STEP = 5;
 const query = parseQuery(window.location.search);
 let offset = Number(query.offset) || 0;
 
-if (query.scrollToEnd) {
-    window.scrollTo(0, document.body.clientHeight);
-}
-
 document.getElementById("prev_photos").addEventListener("click", async function() {
     offset += OFFSET_STEP;
-    window.location.href = `http://${window.location.host}/?offset=${offset}&scrollToEnd=true`;
+
+    const prevPhotos = await fetch(`/photos?offset=${offset}`).then((resp) => resp.json());
+    const parentNode = document.querySelector('.photos');
+    for (photo of prevPhotos) {
+        const el = document.createElement('img');
+        el.src = photo;
+        el.classList.add('photo');
+        parentNode.append(el);
+    }
 })

@@ -13,7 +13,8 @@
   <body>
     <div class="alert alert-secondary header" role="alert">
         <h1>BirIndustries</h1>
-        <button type="submit" class="btn btn-primary">Сделать фото</button>
+        {% block action_button %}
+        {% endblock %}
     </div>
       {% block body_content %}
       {% endblock %}
