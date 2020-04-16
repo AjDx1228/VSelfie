@@ -1,6 +1,7 @@
 html * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 html {
@@ -44,12 +45,20 @@ html {
     align-items: center;
 }
 
+.video-content {
+    margin-right: 20px;
+}
+
 .result-content {
     display: none;
 }
 
 #publish, #snap {
     margin-top: 10px;
+}
+
+#snap {
+    display: none;
 }
 
 .lenta-content-wrapper {
@@ -76,8 +85,17 @@ html {
 }
 
 .error-wrapper {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     height: calc(100vh - 100px);
+}
+
+.error-wrapper h1 {
+    max-width: 75%;
+    text-align: center;
+}
+
+#video {
+    transform: rotateY(180deg);
 }
