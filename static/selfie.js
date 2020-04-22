@@ -27,8 +27,12 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             const data = {
                 photo: canvas.toDataURL()
             }
+            
+            const userString = localStorage.getItem('user');
+            const user = JSON.parse(userString);
+            const vk_id = user['id'];
 
-            await fetch('/publish', {
+            await fetch(`/publish/${vk_id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json;charset=utf-8'

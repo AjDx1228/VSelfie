@@ -1,8 +1,6 @@
 from data import db_session
 from data import photos
 
-db_session.global_init("db/photos.sqlite")
-
 def get_prev_photos(offset=0): 
     MAX_PHOTOS = 5
     if offset == None or int(offset) < 0:
@@ -11,10 +9,14 @@ def get_prev_photos(offset=0):
 
     session = db_session.create_session()
 
-    last_read_id = (session).query(photos.Photo) \
+    last_el = (session).query(photos.Photo) \
                       .order_by(photos.Photo.id.desc()) \
-                      .first().id - offset + 1
+                      .first()
+                          
+    if not last_el:
+        return []
 
+    last_read_id = last_el.id - offset + 1
     result = []
     rows = (session).query(photos.Photo) \
                       .order_by(photos.Photo.id.desc()) \
@@ -24,4 +26,16 @@ def get_prev_photos(offset=0):
     for photo in rows:
         result.append(photo.dataURI)
 
+    return result
+
+def get_photos_with_vk_id(vk_id):
+    result = []
+    session = db_session.create_session()
+    rows = (session).query(photos.Photo) \
+                    .order_by(photos.Photo.id.desc()) \
+                    .filter(photos.Photo.user_id == vk_id)
+    
+    for photo in rows:
+        result.append(photo.dataURI)
+    
     return result

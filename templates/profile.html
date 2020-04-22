@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block action_button %}
+<a href="/selfie" class="btn btn-primary">Сделать фото</a>
+{% endblock %}
+{% block body_content %}
+<div class='your-photos-text'>
+    <h1>
+        Ваши фотографии
+    </h1>
+</div>
+<div class="photos-content-wrapper">
+    <div class="photos">
+    </div>
+</div>
+<script src="{{ url_for('static', filename='profile.js') }}" rel="stylesheet"></script>
+{% endblock %}

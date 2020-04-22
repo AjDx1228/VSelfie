@@ -9,12 +9,18 @@ html {
     width: 100vw;
 }
 
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+
 .header {
     height: 100px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
 .header.alert {
     margin-bottom: 0;
 }
@@ -24,6 +30,7 @@ html {
     width: max-content;
     display: flex;
     align-items: center;
+    color: #ffffff;
 }
 
 .selfie-content-wrapper {
@@ -61,7 +68,7 @@ html {
     display: none;
 }
 
-.lenta-content-wrapper {
+.photos-content-wrapper {
     padding: 20px;
 }
 
@@ -84,11 +91,15 @@ html {
     margin: 20px 0;
 }
 
-.error-wrapper {
-    display: none;
+.error-wrapper, .server-error-wrapper {
+    display: flex;
     justify-content: center;
     align-items: center;
     height: calc(100vh - 100px);
+}
+
+.error-wrapper {
+    display: none;
 }
 
 .error-wrapper h1 {
@@ -98,4 +109,31 @@ html {
 
 #video {
     transform: rotateY(180deg);
+}
+
+#unauthorize {
+    display: none;
+}
+
+#unauthorize, #authorize {
+    margin-right: 60px;
+}
+
+.left-header-content {
+    display: flex;
+}
+
+.user-info {
+    display: none;
+    margin-right: 20px;
+    align-items: center;
+}
+
+#user-name {
+    font-weight: 900;
+}
+
+.your-photos-text {
+    display: flex;
+    justify-content: center;
 }

@@ -11,12 +11,22 @@
     <title> Web page </title>
   </head>
   <body>
-    <div class="alert alert-secondary header" role="alert">
-        <h1>BirIndustries</h1>
-        {% block action_button %}
-        {% endblock %}
+    <div class="alert alert-info header" role="alert">
+        <h1>
+          <a href="/">VSelfie</a>
+        </h1>
+        <div class='left-header-content'>
+          <div class='user-info'>
+            <a href="/profile" id='user-name'></a>
+          </div>
+          <button id="authorize" class="btn btn-primary">Авторизация ВК</button>
+          <button id="unauthorize" class="btn btn-primary">Выйти</button>
+          {% block action_button %}
+          {% endblock %}
+        </div>
     </div>
       {% block body_content %}
       {% endblock %}
   </body>
+  <script src="{{ url_for('static', filename='main.js') }}" rel="stylesheet"></script>
 </html>
