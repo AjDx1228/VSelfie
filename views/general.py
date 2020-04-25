@@ -63,7 +63,7 @@ def authorize_vk():
             data={
                 'client_id':'7413978',
                 'client_secret':'8dFRRkGF7bCpCVQLK0L2',
-                'redirect_uri':'http://127.0.0.1:8080/callback/vk/code',
+                'redirect_uri':'https://{}/callback/vk/code'.format(request.host),
                 'code':code
             }).json()
         access_token = response_data['access_token']
