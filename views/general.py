@@ -64,34 +64,31 @@ def callback_vk():
 
 @mod.route('/authorize/vk')
 def authorize_vk():
-    try:
-        code = request.args.get('code')
-        response_data = requests.post(
-            'https://oauth.vk.com/access_token',
-            data={
-                'client_id': CLIENT_ID,
-                'client_secret': CLIENT_SECRET,
-                'redirect_uri':'{}://{}/callback/vk/code'.format(request.scheme, request.host),
-                'code':code
-            }).json()
-        access_token = response_data['access_token']
-        user = requests.post(
-            'https://api.vk.com/method/users.get',
-            data={
-                'user_ids':response_data['user_id'],
-                'fields':'photo_50',
-                'access_token':response_data['access_token'],
-                'v':'5.103'
-            }).json()['response'][0]
-        
-        add_user_to_db(user)
+    code = request.args.get('code')
+    response_data = requests.post(
+        'https://oauth.vk.com/access_token',
+        data={
+            'client_id': CLIENT_ID,
+            'client_secret': CLIENT_SECRET,
+            'redirect_uri':'{}://{}/callback/vk/code'.format(request.scheme, request.host),
+            'code':code
+        }).json()
+    access_token = response_data['access_token']
+    user = requests.post(
+        'https://api.vk.com/method/users.get',
+        data={
+            'user_ids':response_data['user_id'],
+            'fields':'photo_50',
+            'access_token':response_data['access_token'],
+            'v':'5.103'
+        }).json()['response'][0]
+    
+    add_user_to_db(user)
 
-        # Добавление сессии юзера
-        session['user'] = user
+    # Добавление сессии юзера
+    session['user'] = user
 
-        return user
-    except:
-        return {"error": sys.exe_info()[0]} 
+    return user
 
 @mod.route('/callback/vk/access_token')
 def callback_vk_access_token():
