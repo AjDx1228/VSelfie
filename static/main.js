@@ -12,8 +12,9 @@ if (userString) {
 
 btnAuthorize.addEventListener("click", async function() {
     if (!localStorage.getItem('user')) {
+        const CLIENT_ID = await fetch(`/client_id`)
         window.open(
-            `https://oauth.vk.com/authorize?client_id=7413978&display=popup&redirect_uri=${window.location.origin}/callback/vk/code&scope=photos`,
+            `https://oauth.vk.com/authorize?client_id=${CLIENT_ID}&display=popup&redirect_uri=${window.location.origin}/callback/vk/code&scope=photos`,
             "JSSite",
             "width=800,height=800,resizable=yes,scrollbars=yes,status=yes"
         );

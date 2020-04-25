@@ -122,3 +122,7 @@ def publish_photo():
 def logout():
     session.pop('user')
     return 'OK'
+
+@mod.route('/client_id')
+def client_id():
+    return CLIENT_ID
