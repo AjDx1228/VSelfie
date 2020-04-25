@@ -5,11 +5,14 @@ import requests
 from data import photos, db_session, users
 from models.photos import *
 from models.users import *
-import secrets
 
 mod = Blueprint('general', __name__)
-CLIENT_ID = os.getenv('CLIENT_ID', secrets.CLIENT_ID)
-CLIENT_SECRET = os.getenv('CLIENT_SECRET', secrets.CLIENT_SECRET)
+CLIENT_ID = os.getenv('CLIENT_ID')
+CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+
+if (not CLIENT_ID or not CLIENT_SECRET):
+    print('Create .env file with CLIENT_ID, CLIENT_SECRET')
+    exit()
 
 @mod.route('/')
 def lenta():
