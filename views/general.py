@@ -73,6 +73,7 @@ def authorize_vk():
             'redirect_uri':'{}://{}/callback/vk/code'.format(request.scheme, request.host),
             'code':code
         }).json()
+    print(response_data)
     access_token = response_data['access_token']
     user = requests.post(
         'https://api.vk.com/method/users.get',
