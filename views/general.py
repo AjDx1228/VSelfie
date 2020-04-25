@@ -1,11 +1,15 @@
+import os
+
 from flask import Blueprint, render_template, request, redirect, jsonify, session 
 import requests
 from data import photos, db_session, users
 from models.photos import *
 from models.users import *
-
+import secrets
 
 mod = Blueprint('general', __name__)
+CLIENT_ID = os.getenv('CLIENT_ID', secrets.CLIENT_ID)
+CLIENT_SECRET = os.getenv('CLIENT_SECRET', secrets.CLIENT_SECRET)
 
 @mod.route('/')
 def lenta():
@@ -61,9 +65,9 @@ def authorize_vk():
         response_data = requests.post(
             'https://oauth.vk.com/access_token',
             data={
-                'client_id':'7413978',
-                'client_secret':'8dFRRkGF7bCpCVQLK0L2',
-                'redirect_uri':'https://{}/callback/vk/code'.format(request.host),
+                'client_id': CLIENT_ID,
+                'client_secret': CLIENT_SECRET,
+                'redirect_uri':'{}://{}/callback/vk/code'.format(request.scheme, request.host),
                 'code':code
             }).json()
         access_token = response_data['access_token']
