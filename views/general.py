@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, jsonify
+from flask import Blueprint, render_template, request, redirect, jsonify, session 
 import requests
 from data import photos, db_session, users
 from models.photos import *
@@ -28,12 +28,21 @@ def get_html_photos():
 
 @mod.route('/profile')
 def profile():
-    return render_template('profile.html')
+    user = session.get('user')
+    if user:
+        return render_template('profile.html')
+    else:
+        return render_template('error.html')
 
-@mod.route('/my_photos/<vk_id>')
-def my_photos(vk_id):
-    my_photos = get_photos_with_vk_id(vk_id)
-    return jsonify(my_photos)
+@mod.route('/my_photos')
+def my_photos():
+    user = session.get('user')
+    if user:
+        vk_id = user['id']
+        my_photos = get_photos_with_vk_id(vk_id)
+        return jsonify(my_photos)
+    else:
+        return 'You are not authorized for this operation'
 
 
 @mod.route('/selfie')
@@ -67,17 +76,10 @@ def authorize_vk():
                 'v':'5.103'
             }).json()['response'][0]
         
-        # Унести в метод add_user в модели
-        
-        user_db = users.User()
-        user_db.vk_id = user['id']
-        user_db.name = user['first_name']
-        user_db.surname = user['last_name']
-        user_db.vk_photo = user['photo_50']
+        add_user_to_db(user)
 
-        session = db_session.create_session()
-        session.add(user_db)
-        session.commit()
+        # Добавление сессии юзера
+        session['user'] = user
 
         return user
     except:
@@ -95,17 +97,21 @@ def callback_vk_access_token():
             'v':'5.103'
         }).json()
 
-@mod.route('/publish/<vk_id>', methods=['POST'])
-def publish_photo(vk_id):
-    # Получить пользователя, если не удаломь то -1
-    current_user_id = vk_id
 
-    # Унести в метод add_photo в моделях
-    photo = photos.Photo()
-    photo.user_id = current_user_id
-    photo.dataURI = request.get_json()['photo']
-    session = db_session.create_session()
-    session.add(photo)
-    session.commit()
+@mod.route('/publish', methods=['POST'])
+def publish_photo():
+    user = session.get('user')
+    if user:
+        current_user_id = user['id']
+    else:
+        current_user_id = -1
 
+    photo = request.get_json()['photo']
+    add_photo_to_db(current_user_id, photo)
+
+    return 'OK'
+
+@mod.route('/logout')
+def logout():
+    session.pop('user')
     return 'OK'

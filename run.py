@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask
 from data import db_session
 
@@ -10,4 +12,6 @@ app.register_blueprint(general.mod)
 db_session.global_init("db/vselfie.sqlite")
 
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 8080))
+    #app.run(port=port, host='0.0.0.0')
     app.run(port=8080, host='127.0.0.1', debug=True, use_reloader=True, threaded=True)

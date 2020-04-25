@@ -38,6 +38,8 @@ btnUnauthorize.addEventListener("click", async function() {
     btnAuthorize.style.display = 'block';
     btnUnauthorize.style.display = 'none';
     document.querySelector('.user-info').style.display = 'none';
+
+    await fetch(`/logout`);
 })
 
 function renderUser(user) {

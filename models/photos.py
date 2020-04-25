@@ -39,3 +39,12 @@ def get_photos_with_vk_id(vk_id):
         result.append(photo.dataURI)
     
     return result
+
+
+def add_photo_to_db(current_user_id, photo_data):
+    photo = photos.Photo()
+    photo.user_id = current_user_id
+    photo.dataURI = photo_data
+    session = db_session.create_session()
+    session.add(photo)
+    session.commit()
