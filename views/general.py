@@ -10,6 +10,7 @@ from models.users import *
 mod = Blueprint('general', __name__)
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
+APP_ENV = os.getenv('APP_ENV')
 
 if (not CLIENT_ID or not CLIENT_SECRET):
     print('Create .env file with CLIENT_ID, CLIENT_SECRET')
