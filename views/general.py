@@ -125,4 +125,4 @@ def logout():
 
 @mod.route('/client_id')
 def client_id():
-    return CLIENT_ID
+    return jsonify(CLIENT_ID)

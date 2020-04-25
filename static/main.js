@@ -12,7 +12,7 @@ if (userString) {
 
 btnAuthorize.addEventListener("click", async function() {
     if (!localStorage.getItem('user')) {
-        const CLIENT_ID = await fetch(`/client_id`)
+        const CLIENT_ID = await fetch(`/client_id`).then((res) => res.json())
         window.open(
             `https://oauth.vk.com/authorize?client_id=${CLIENT_ID}&display=popup&redirect_uri=${window.location.origin}/callback/vk/code&scope=photos`,
             "JSSite",
