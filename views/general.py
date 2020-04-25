@@ -89,8 +89,8 @@ def authorize_vk():
         session['user'] = user
 
         return user
-    except:
-        return {"error": "Unexpected error"}
+    except Exception as e:
+        return {"error": e}
 
 @mod.route('/callback/vk/access_token')
 def callback_vk_access_token():
