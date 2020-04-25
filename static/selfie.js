@@ -36,7 +36,7 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 body: JSON.stringify(data)
             });
 
-            window.location.href = `http://${window.location.host}/`;
+            window.location.href = window.location.origin;
         });
     }).catch(() => {
         errorContainer.style.display = 'flex';
