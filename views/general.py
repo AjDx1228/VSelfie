@@ -1,4 +1,5 @@
 import os
+import sys
 
 from flask import Blueprint, render_template, request, redirect, jsonify, session 
 import requests
@@ -89,8 +90,8 @@ def authorize_vk():
         session['user'] = user
 
         return user
-    except Exception as e:
-        return {"error": e}
+    except:
+        return {"error": sys.exe_info()[0]} 
 
 @mod.route('/callback/vk/access_token')
 def callback_vk_access_token():
