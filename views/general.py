@@ -65,15 +65,17 @@ def callback_vk():
 @mod.route('/authorize/vk')
 def authorize_vk():
     code = request.args.get('code')
+    protocol = 'https'
+    if APP_ENV == 'development':
+        protocol = 'http'
     response_data = requests.post(
         'https://oauth.vk.com/access_token',
         data={
             'client_id': CLIENT_ID,
             'client_secret': CLIENT_SECRET,
-            'redirect_uri':'{}://{}/callback/vk/code'.format(request.scheme, request.host),
+            'redirect_uri':'{}://{}/callback/vk/code'.format(protocol, request.host),
             'code':code
         }).json()
-    print(response_data)
     access_token = response_data['access_token']
     user = requests.post(
         'https://api.vk.com/method/users.get',
