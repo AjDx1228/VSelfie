@@ -10,7 +10,7 @@ class User(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer, 
                            primary_key=True, autoincrement=True)
-    vk_id = sqlalchemy.Column(sqlalchemy.Integer, nullable=True)
+    vk_id = sqlalchemy.Column(sqlalchemy.Integer, unique=True)
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     surname = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     vk_photo = sqlalchemy.Column(sqlalchemy.String, nullable=True)
