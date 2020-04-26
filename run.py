@@ -18,7 +18,9 @@ app.config['SECRET_KEY'] = SECRET_KEY
 db_session.global_init(DATABASE_URL)
 
 from views import general
+from views import auth
 app.register_blueprint(general.mod)
+app.register_blueprint(auth.mod)
 
 if __name__ == '__main__':
     if APP_ENV == 'production':
