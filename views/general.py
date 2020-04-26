@@ -10,7 +10,7 @@ from models.users import *
 mod = Blueprint('general', __name__)
 CLIENT_ID = os.getenv('CLIENT_ID')
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
-APP_ENV = os.getenv('APP_ENV')
+APP_ENV = os.getenv('APP_ENV', 'development')
 
 if (not CLIENT_ID or not CLIENT_SECRET):
     print('Create .env file with CLIENT_ID, CLIENT_SECRET')
@@ -122,7 +122,7 @@ def publish_photo():
 
 @mod.route('/logout')
 def logout():
-    session.pop('user')
+    session.pop('user', None)
     return 'OK'
 
 @mod.route('/client_id')
