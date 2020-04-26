@@ -7,6 +7,15 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         video.srcObject = stream;
         video.play();
 
+        var videoWidth, videoHeight;
+        var getVideoSize = function() {
+            videoWidth = video.videoWidth;
+            videoHeight = video.videoHeight;
+            console.log(videoWidth, videoHeight)
+            video.removeEventListener('playing', getVideoSize, false);
+        };
+
+        video.addEventListener('playing', getVideoSize, false);
 
         var snapBtn = document.getElementById("snap");
         snapBtn.style.display = 'block';
