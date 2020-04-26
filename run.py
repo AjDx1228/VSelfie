@@ -11,13 +11,14 @@ from data import db_session
 app = Flask(__name__)
 SECRET_KEY = os.getenv('SECRET_KEY', 'vselfie_secret_key')
 APP_ENV = os.getenv('APP_ENV', 'development')
+DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite:///db/vselfie.sqlite?check_same_thread=False')
 app.config['SECRET_KEY'] = SECRET_KEY
 
 
+db_session.global_init(DATABASE_URL)
+
 from views import general
 app.register_blueprint(general.mod)
-
-db_session.global_init("db/vselfie.sqlite")
 
 if __name__ == '__main__':
     if APP_ENV == 'production':
