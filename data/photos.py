@@ -10,7 +10,7 @@ class Photo(SqlAlchemyBase):
 
     id = sqlalchemy.Column(sqlalchemy.Integer,
                            primary_key=True, autoincrement=True)
-    user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.vk_id"))
+    user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("users.id"))
     dataURI = sqlalchemy.Column(sqlalchemy.String, nullable=True)
 
     user = orm.relation('User')

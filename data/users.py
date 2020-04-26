@@ -8,9 +8,7 @@ from sqlalchemy import orm
 class User(SqlAlchemyBase):
     __tablename__ = 'users'
 
-    id = sqlalchemy.Column(sqlalchemy.Integer, 
-                           primary_key=True, autoincrement=True)
-    vk_id = sqlalchemy.Column(sqlalchemy.Integer, unique=True)
+    id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True)
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     surname = sqlalchemy.Column(sqlalchemy.String, nullable=True)
     vk_photo = sqlalchemy.Column(sqlalchemy.String, nullable=True)
